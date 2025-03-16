@@ -3,24 +3,27 @@ name: Deploy ke GitHub Pages
 on:
   push:
     branches:
-      - main  # Menjalankan workflow setiap ada perubahan di branch utama
+      - main  # Sesuaikan jika menggunakan branch lain
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Setup Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v3
 
-      - name: Upload Artifacts
-        uses: actions/upload-pages-artifact@v1
+      - name: Upload Website Files
+        uses: actions/upload-pages-artifact@v1  # Harusnya ini, bukan upload-artifact
         with:
           path: "."
 
       - name: Deploy ke GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v2
